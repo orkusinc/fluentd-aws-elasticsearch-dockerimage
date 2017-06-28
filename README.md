@@ -5,7 +5,7 @@ The container is supposed to listen on port 24224 (or FLUENTD\_PORT). Since dock
 
 The messages can get forwarded to an AWS ES instance via https transport.
 
-One drawback of the fluentd log driver is, that the messages are not locally available with `docker logs`. Therefore, 3 example configs are shipped to 1) AWS ES, 2) a mountable local file, 3) to both 1) and 2).
+One drawback of the fluentd log driver is, that the messages are not locally available with `docker logs`. Therefore, 3 example configs are included to ship logs to 1) AWS ES, 2) a mountable local file, 3) both 1 and 2.
 
 ## config
 There are 2 ways to provide the config:
