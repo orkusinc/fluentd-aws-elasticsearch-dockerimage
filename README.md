@@ -16,7 +16,10 @@ This file is picked up in the `docker-build`-target and copied into the image an
 
 Example:
 ```bash
-make prepare-config AWS_ELASTICSEARCH_URL=https://herewego.tld AWS_REGION=eu-west-1 CONF_FILE_TEMPLATE=fluent-aws.conf.tmpl
+make prepare-config \
+    AWS_ELASTICSEARCH_URL=https://search-awslogs-xxx.eu-west-1.es.amazonaws.com \
+    AWS_REGION=eu-west-1 \
+    CONF_FILE_TEMPLATE=fluent-aws.conf.tmpl
 ```
 
 ### mount a config into container
@@ -28,15 +31,15 @@ make docker-run CONF_FILE=$(pwd)/fluent.conf
 This is the preferred way for local/testing scenarios.
 
 
-## variables
-Variable Name|Default|Description
----|---|---
-STAGE|(empty)|When set, will set the container-name accordingly. `make docker-run STAGE=dev` => container name: fluentd-aws-elasticsearch-dev
-FLUENTD\_PORT|24224|Which port to export from the container to listen on for incoming log messages.
-AWS\_REGION|eu-west-1|Used in substitution in case of target `prepare-config`
-AWS\_ELASTICSEARCH\_URL|(empty)|Used in substitution in case of target `prepare-config`
-CONF\_FILE\_TEMPLATE|(empty)|Used as base config to apply substitutions to in case of target `prepare-config`
-CONF\_FILE|(empty)|abs path to local conf file which should get mounted into the container with target `docker-run`
+## ENV variables
+Variable Name          |Default    |Description
+---                    |---        |---
+STAGE                  | (empty)   | When set, will set the container-name accordingly. `make docker-run STAGE=dev` => container name: fluentd-aws-elasticsearch-dev
+FLUENTD\_PORT          | 24224     | Which port to export from the container to listen on for incoming log messages.
+AWS\_REGION            | eu-west-1 | Used in substitution in case of target `prepare-config`
+AWS\_ELASTICSEARCH\_URL| (empty)   | Used in substitution in case of target `prepare-config`
+CONF\_FILE\_TEMPLATE   | (empty)   | Used as base config to apply substitutions to in case of target `prepare-config`
+CONF\_FILE             | (empty)   | abs path to local conf file which should get mounted into the container with target `docker-run`
 
 ## IAM/Permissions
 The base setup assumes that the container is allowed to ship messages to AWS ES by role or IP.
