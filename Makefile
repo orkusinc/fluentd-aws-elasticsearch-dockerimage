@@ -23,9 +23,6 @@ endif
 IMAGE_NAME=meteogroup/fluentd-aws-elasticsearch
 CONTAINER_NAME=fluentd-aws-elasticsearch$(STAGE_STR)
 
-test:
-	@echo $(MAKEFILE_DIR)
-
 clean:
 	rm -f $(VERSION_FILE)
 	rm -f fluent.conf
