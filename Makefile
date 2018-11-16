@@ -1,6 +1,6 @@
 VERSION_FILE=version.txt
 VERSION ?= $(shell test -e $(VERSION_FILE) && cat $(VERSION_FILE) || date -u +"%Y-%m-%dT%H-%M-%SZ"  | tee $(VERSION_FILE))
-AWS_REGION ?= eu-west-1
+AWS_REGION ?= us-west-2
 
 CURRENT_WORKING_DIR := $(shell pwd)
 MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -20,7 +20,7 @@ else
 	CONF_FILE_MOUNT=$(empty)
 endif
 
-IMAGE_NAME=meteogroup/fluentd-aws-elasticsearch
+IMAGE_NAME=fluentd-aws-elasticsearch
 CONTAINER_NAME=fluentd-aws-elasticsearch$(STAGE_STR)
 
 clean:
@@ -55,6 +55,6 @@ docker-rm:
 	-docker rm $(CONTAINER_NAME)
 
 docker-push:
-	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest
-	docker push $(IMAGE_NAME):$(VERSION)
+	docker tag $(IMAGE_NAME):$(VERSION) 264676673172.dkr.ecr.us-west-2.amazonaws.com/$(IMAGE_NAME):latest
+	docker push 264676673172.dkr.ecr.us-west-2.amazonaws.com/$(IMAGE_NAME):latest
 	docker push $(IMAGE_NAME):latest
